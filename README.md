@@ -11,5 +11,3 @@ Pressing Randomize picks a random whole number and draws the hat's full texture 
 The seed rules are the ones from your Workbench compositor: each layer's rotation, scale and translate come from the seed, the layer's place in the definition and the field name, using the same hash. The definition itself is written out in `LOOKUPS` at the top of `main.js`. If you change the paintkit definition, `LOOKUPS` has to change with it (send it to me and I will).
 
 **These seeds are not the game's seeds.** Valve's compositor is not public, so the Workbench's rules (how a layer is wrapped, how the blend works) are assumptions. Your hat has no paintkit in the game yet, so there is nothing to match.
-
-To check this page against your Workbench: type the same whole number as the seed there, then open `index.html#seed=<same number>` here and compare. Try three or four seeds.
