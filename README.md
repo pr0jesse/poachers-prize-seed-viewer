@@ -1,13 +1,24 @@
 # Poacher's Prize: paintkit hat viewer
 
-A static page: one hat on a dummy head and a **Randomize** button. Drag to turn the hat, Ctrl + left drag to move the light, scroll or Ctrl + right drag to zoom (a little). On touch: one finger turns, two fingers pinch to zoom and slide to move the light. No build step and no server code.
+A static page that shows the Poacher's Prize hat on a dummy head, with a **Randomize** button that gives it a new random paintkit pattern.
 
 Workshop page: https://steamcommunity.com/sharedfiles/filedetails/?id=3844173236
 
-## How the roll works
+## Controls
 
-Pressing Randomize picks a random whole number and draws the hat's full texture on the graphics card in one pass, then shows it. It is not a cached picture. The number is only in the address bar (`#seed=...`), so a link such as `.../#seed=1234` opens that exact hat.
+- Mouse: drag to turn the hat, Ctrl + left drag to move the light, scroll or Ctrl + right drag to zoom (a little).
+- Touch: one finger turns, two fingers pinch to zoom and slide to move the light.
 
-The seed rules are the ones from your Workbench compositor: each layer's rotation, scale and translate come from the seed, the layer's place in the definition and the field name, using the same hash. The definition itself is written out in `LOOKUPS` at the top of `main.js`. If you change the paintkit definition, `LOOKUPS` has to change with it (send it to me and I will).
+## How it works
 
-**These seeds are not the game's seeds.** Valve's compositor is not public, so the Workbench's rules (how a layer is wrapped, how the blend works) are assumptions. Your hat has no paintkit in the game yet, so there is nothing to match.
+Pressing Randomize picks a random whole number (the seed) and draws the hat's full texture on the graphics card in one pass, then shows it. The seed is only in the address bar (`#seed=...`), so a link such as `.../#seed=1234` opens that exact hat.
+
+The hat's fur comes from the paintkit's textures (fur A, fur B, gradient, blotch, marks and static UV). Each layer's rotation, scale and offset is worked out from the seed, in a similar way to the TF2 Workbench.
+
+**These are not Valve's seeds.** Valve's own compositor is not public, so this page recreates the idea. The same seed number will not give the same hat as in the game or the Workbench.
+
+The tail has a small spring simulation, so it swings when you turn the hat. The shading imitates TF2's look (light ramp, phong, rim light).
+
+## Running it locally
+
+There is no build step. Browsers block loading files from disk, so serve the folder rather than opening `index.html` directly: run `start.bat` on Windows (needs Node.js), or use any static file server.
