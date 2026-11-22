@@ -1,0 +1,102 @@
+/* TF2 fonts (Valve's: check you may publish them) */
+@font-face { font-family: "TF2 Build"; src: url("assets/font/tf2build.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "TF2 Secondary"; src: url("assets/font/tf2secondary.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "TF2"; src: url("assets/font/tf2.ttf") format("truetype"); font-display: swap; }
+@font-face {
+  font-family: "Anton";
+  src: url("assets/font/anton-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* one size drives everything: the panel is as wide as the screen allows, up to a cap, and never taller than the screen */
+  --w: min(92vw, 560px, calc((100dvh - 190px) * 1));
+  --edge: #1d1a17;
+  --cream: #d9ccb0;
+  --btn: #8d8372;
+  --btn-hi: #a49a88;
+  --btn-lo: #756c5d;
+  --red: #d23a2a;
+  --title: #aea898;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; overflow: hidden; }
+body {
+  font-family: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+  background: radial-gradient(ellipse at 50% 35%, #3b3631 0%, #26221f 55%, #161311 100%);
+  -webkit-user-select: none; user-select: none;
+}
+
+#app { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(var(--w) * 0.03); padding: 8px 0; }
+
+#head { width: var(--w); display: flex; flex-direction: column; align-items: center; gap: calc(var(--w) * 0.012); }
+#name {
+  margin: 0; width: 100%; text-align: center; text-transform: uppercase; line-height: 1.05;
+  font-family: "TF2 Build", "Anton", Impact, "Arial Narrow", sans-serif; font-weight: 400; letter-spacing: .04em;
+  font-size: clamp(22px, calc(var(--w) * 0.07), 40px); color: var(--title);
+  text-shadow: 0 2px 0 #161616, 0 3px 6px rgba(0,0,0,.5);
+}
+
+#frame {
+  position: relative; width: var(--w); height: var(--w); border-radius: calc(var(--w) * 0.035);
+  border: calc(var(--w) * 0.007 + 2px) solid var(--cream); overflow: hidden;
+  background: radial-gradient(ellipse at 50% 42%, #66605a 0%, #4c4843 55%, #353230 100%);
+  box-shadow: 0 0 0 3px var(--edge), 0 10px 28px rgba(0,0,0,.55), inset 0 0 40px rgba(0,0,0,.35);
+}
+#view { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+#view.drag { cursor: grabbing; }
+
+
+#roll {
+  width: var(--w); padding: calc(var(--w) * 0.028) 0; min-height: 48px;
+  font-family: "TF2 Build", "Anton", Impact, sans-serif; font-weight: 400; letter-spacing: .06em; text-transform: uppercase;
+  font-size: clamp(16px, calc(var(--w) * 0.05), 24px); color: #e9e1cc;
+  background: var(--btn); border: 0; border-radius: 4px; box-shadow: none; text-shadow: none; cursor: pointer;
+  transition: background .1s;
+}
+#roll:hover, #roll:active { background: var(--btn-hi); color: #fff; }
+#roll:focus-visible { outline: 3px solid #e8a33a; outline-offset: 2px; }
+
+#loading { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #1b1816; color: var(--cream);
+  font-family: "Anton", Impact, sans-serif; letter-spacing: .12em; text-transform: uppercase; font-size: 22px; transition: opacity .3s; z-index: 5; }
+#loading.done { opacity: 0; pointer-events: none; }
+
+/* short landscape screens (a phone on its side): put the button beside the frame so nothing is cut off */
+@media (orientation: landscape) and (max-height: 480px) {
+  :root { --w: min(calc(100dvh - 24px), 60vw); }
+  #app { display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; align-content: center; justify-content: center; column-gap: 20px; row-gap: 12px; }
+  #head { grid-column: 2; grid-row: 1; align-self: end; width: min(34vw, 320px); }
+  #name { font-size: clamp(18px, 3.6vw, 30px); }
+  #head #sub { font-size: clamp(12px, 2.4vw, 18px); }
+  #frame { grid-column: 1; grid-row: 1 / span 2; }
+  #roll { grid-column: 2; grid-row: 2; align-self: start; width: min(34vw, 320px); }
+}
+
+#sub { margin: 0; text-align: center; text-transform: uppercase; font-family: "TF2 Build", "Anton", Impact, sans-serif; letter-spacing: .06em; color: var(--title);
+  font-size: clamp(16px, calc(var(--w) * 0.05), 28px); text-shadow: 0 2px 0 #161616, 0 3px 6px rgba(0,0,0,.5); }
+
+/* small print: credits bottom left, controls bottom right on wide screens, under the button on narrow ones */
+.note { font-family: "TF2 Secondary", "Trebuchet MS", Verdana, sans-serif; text-transform: uppercase; letter-spacing: .04em;
+  font-size: 11px; line-height: 1.35; color: #c9c0aa; text-shadow: 0 1px 0 #161616; width: var(--w); }
+.note p { margin: 0 0 12px; }
+#controls { text-align: right; }
+#credits a { color: inherit; font-weight: 400; text-decoration: none; }
+#credits a:hover, #credits a:focus-visible { color: #fff; text-decoration: underline; outline: none; }
+#workshop { color: inherit; font-weight: 700; font-size: 1.35em; text-decoration: none; }
+#workshop:hover, #workshop:focus-visible { color: #fff; text-decoration: underline; outline: none; }
+.touch { display: none; }
+@media (pointer: coarse) { .mouse { display: none; } .touch { display: inline; } }
+
+@media (min-width: 900px) and (min-height: 560px) {
+  .note { position: fixed; bottom: 24px; width: min(26vw, 300px); }
+  #credits { left: 28px; }
+  #controls { right: 28px; }
+}
+@media (max-width: 899px), (max-height: 559px) {
+  html, body { overflow-y: auto; }
+  #app { height: auto; min-height: 100%; }
+  #credits, #controls { text-align: center; }
+  #credits { margin-top: 4px; }
+  #controls { margin-top: -4px; }
+}
+@media (orientation: landscape) and (max-height: 480px) { .note { display: none; } }

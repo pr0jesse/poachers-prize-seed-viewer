@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Poacher's Prize - Paintkit hat viewer</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "./lib/three.module.js",
+  "three/addons/": "./lib/addons/"
+} }
+</script>
+</head>
+<body>
+<main id="app">
+  <!-- Change the item name here -->
+  <header id="head">
+    <h1 id="name">"Poacher's Prize"</h1>
+    <p id="sub">Paintkit hat viewer</p>
+  </header>
+
+  <div id="frame">
+    <canvas id="view"></canvas>
+  </div>
+
+  <button id="roll" type="button">Randomize seed</button>
+
+  <aside id="credits" class="note">
+    <p>Credits:<br>Hat: <a href="https://steamcommunity.com/id/pr0jesse/" target="_blank" rel="noopener">Projesse</a> &amp; <a href="https://steamcommunity.com/id/pidialski" target="_blank" rel="noopener">Pidialski</a><br>Mannequin: <a href="https://steamcommunity.com/id/old_mann_forgot_his_age" target="_blank" rel="noopener">Oldmann</a><br>Team Fortress 2 and its assets: Valve</p>
+    <p>AI acknowledgment:<br>Claude (Opus 5.5) was used to help create this viewer</p>
+  </aside>
+
+  <aside id="controls" class="note">
+    <p>Controls:<br>
+      <span class="mouse">LMB: rotate<br>Ctrl+LMB: move light<br>Ctrl+RMB: zoom</span>
+      <span class="touch">Drag: rotate<br>Pinch: zoom<br>Two fingers: move light</span></p>
+    <!-- Put the Workshop link in href when the item is published -->
+    <p><a id="workshop" href="#" target="_blank" rel="noopener">Click here to check it out on the Workshop!</a></p>
+  </aside>
+</main>
+
+<div id="loading">Loading...</div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
